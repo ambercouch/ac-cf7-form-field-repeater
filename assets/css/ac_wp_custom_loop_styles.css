@@ -1,0 +1,19 @@
+.c-accl-post-list{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.c-accl-post-list__post-thumb{
+    width: 25%;
+    padding: 0 0.25em;
+}
+
+.c-accl-post-thumb__header{
+    width: 100% !important;
+    float: none;
+    display: block;
+}
+
+.c-accl-post-thumb__excerpt p{
+    font-size: 0.8em !important;
+}
