@@ -27,7 +27,8 @@
             var adder = '<button id="'+adderId+'">'+repeaterText+'</button>'
             var adderPosition =  elementToRepeat.attr('data-ac-repeater-position') ? elementToRepeat.attr('data-ac-repeater-position') : 'prepend';
             var arrayName = elementToRepeat.attr('data-ac-repeater') ? elementToRepeat.attr('data-ac-repeater') : null;
-            console.log('pos = ' + adderPosition );
+            var eventCloneAdded = new CustomEvent('cloneAdded')
+
 
             //add the element to the list of clones
             repeater.clones.push(elementToRepeat);
@@ -98,6 +99,7 @@
 
                 //Add the cloned element after the element that was cloned
                 cloneSettings.element.after(clone);
+                window.dispatchEvent(eventCloneAdded);
                 //Update the clone count
                 cloneSettings.cloneCount = cloneSettings.cloneCount + 1
 
@@ -133,6 +135,9 @@
     let ffrFields = [];
     console.log($repeaterFields);
     console.log($repeaterGroups);
+    window.addEventListener('cloneAdded', function (e) {
+        console.log('clone added')
+    }, false);
 
     $.each($repeaterGroups, function (i, el) {
 
