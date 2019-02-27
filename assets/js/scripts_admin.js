@@ -12,9 +12,10 @@ var ac_cf7_compose = _wpcf7.taggen.compose;
     _wpcf7.taggen.compose = function(tagType, $form)
     {
 
-        // original behavior - use function.apply to preserve context
+        // Return the original function
         var ret = ac_cf7_compose.apply(this, arguments);
 
+        // if acrepeater, add the closing string to the output tag
         if (tagType== 'acrepeater') ret += "[/acrepeater]";
 
         // END

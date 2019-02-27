@@ -5,9 +5,10 @@
  * Released under the WTFPL license - http://sam.zoy.org/wtfpl/
  *
  */
-console.log('ac repeater');
+
 
 ;(function( $ ){
+    console.log('ac repeater function');
     //Check for elements that need to repeat
     if ($('[data-ac-repeater]').length > 0){
 
@@ -113,4 +114,9 @@ console.log('ac repeater');
 
 
     };
+})( window.jQuery);
+
+;(function( $ ){
+    console.log('cf7 ffr repeater');
+
 })( window.jQuery);
