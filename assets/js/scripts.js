@@ -115,7 +115,42 @@
     };
 })( window.jQuery);
 
+/*!
+ * AC CF7FFR
+ *
+ * Copyright 2019, Richie Arnold and AmberCouch - http://ambercouch.co.uk
+ * Released under the WTFPL license - http://sam.zoy.org/wtfpl/
+ *
+ */
+
 ;(function( $ ){
     console.log('cf7ffr repeater');
+    let $repeaterGroups = $('[data-ac-repeater]');
+    let $repeaterFields = $('[data-ac-repeater] .wpcf7-form-control');
+    let $repeaterGroupsInput = $('[name="_acffr_repeatable_groups"]');
+    let $repeaterFieldsInput = $('[name="_acffr_repeatable_group_fields"]');
+    let ffrGroups = [];
+    let ffrFields = [];
+    console.log($repeaterFields);
+    console.log($repeaterGroups);
+
+    $.each($repeaterGroups, function (i, el) {
+
+        ffrGroups.push(el.id);
+
+    });
+
+    $repeaterGroupsInput.val(JSON.stringify(ffrGroups));
+
+    $.each($repeaterFields, function (i, el) {
+
+        ffrFields.push($(el).attr('name'));
+
+    });
+    $repeaterFieldsInput.val(JSON.stringify(ffrFields));
+
+
+    console.log(ffrGroups);
+
 
 })( window.jQuery);
