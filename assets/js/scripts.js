@@ -8,7 +8,7 @@
 
 
 ;(function( $ ){
-    console.log('ac repeater function');
+    console.log('ac form field repater');
     //Check for elements that need to repeat
     if ($('[data-ac-repeater]').length > 0){
 
@@ -28,7 +28,6 @@
             var adderPosition =  elementToRepeat.attr('data-ac-repeater-position') ? elementToRepeat.attr('data-ac-repeater-position') : 'prepend';
             var arrayName = elementToRepeat.attr('data-ac-repeater') ? elementToRepeat.attr('data-ac-repeater') : null;
             console.log('pos = ' + adderPosition );
-            console.log('arrayName = ' + arrayName );
 
             //add the element to the list of clones
             repeater.clones.push(elementToRepeat);
@@ -117,6 +116,6 @@
 })( window.jQuery);
 
 ;(function( $ ){
-    console.log('cf7 ffr repeater');
+    console.log('cf7ffr repeater');
 
 })( window.jQuery);
