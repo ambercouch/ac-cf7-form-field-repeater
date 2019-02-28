@@ -129,30 +129,37 @@
     console.log('cf7ffr repeater');
     let $repeaterGroups = $('[data-ac-repeater]');
     let $repeaterFields = $('[data-ac-repeater] .wpcf7-form-control');
+    window.addEventListener('cloneAdded', function (e) {
+        $repeaterFields = $('[data-ac-repeater] .wpcf7-form-control');
+    });
+
     let $repeaterGroupsInput = $('[name="_acffr_repeatable_groups"]');
     let $repeaterFieldsInput = $('[name="_acffr_repeatable_group_fields"]');
     let ffrGroups = [];
     let ffrFields = [];
-    console.log($repeaterFields);
-    console.log($repeaterGroups);
-    window.addEventListener('cloneAdded', function (e) {
-        console.log('clone added')
-    }, false);
+
+
 
     $.each($repeaterGroups, function (i, el) {
-
         ffrGroups.push(el.id);
-
     });
 
     $repeaterGroupsInput.val(JSON.stringify(ffrGroups));
-
     $.each($repeaterFields, function (i, el) {
-
         ffrFields.push($(el).attr('name'));
-
     });
     $repeaterFieldsInput.val(JSON.stringify(ffrFields));
+
+    window.addEventListener('cloneAdded', function (e) {
+        let ffrFields = [];
+        $.each($repeaterFields, function (i, el) {
+            ffrFields.push($(el).attr('name'));
+        });
+        $repeaterFieldsInput.val(JSON.stringify(ffrFields));
+        console.log('clone added repeaterFields updated')
+    }, false);
+
+
 
 
     console.log(ffrGroups);
