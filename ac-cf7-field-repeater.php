@@ -300,3 +300,21 @@ function ac_repeater_properties($properties, $wpcf7form) {
     }
     return $properties;
 }
+
+/**
+ *
+ * Add the acffr hidden fields to the form.
+ *
+ */
+add_action('wpcf7_form_hidden_fields', 'acffr_form_hidden_fields',10,1);
+
+function acffr_form_hidden_fields($hidden_fields) {
+
+    return array_merge($hidden_fields, array(
+        '_acffr_repeatable_group_fields' => '',
+        '_acffr_repeatable_groups' => '',
+    ));
+}
+
+
+
