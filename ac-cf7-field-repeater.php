@@ -301,6 +301,36 @@ function ac_repeater_properties($properties, $wpcf7form) {
     return $properties;
 }
 
+add_filter( 'wpcf7_posted_data', 'acffr_posted_data' );
+
+function acffr_posted_data($posted_data){
+
+
+    $repeated_groups = json_decode(stripslashes($posted_data['_acffr_repeatable_groups']));
+    if (is_array($repeated_groups) && count($repeated_groups) > 0) {
+        foreach ($repeated_groups as $group) {
+           $posted_data[$group] = '';
+            $repeated_fields = json_decode(stripslashes($posted_data['_acffr_repeatable_group_fields']));
+            if (is_array($repeated_fields) && count($repeated_fields) > 0) {
+                foreach ($repeated_fields as $field) {
+                    echo $field;
+                  echo $posted_data[$field];
+                    $posted_data[$group] .= $posted_data[$field] . "\r\n";
+                }
+            }
+        }
+    }
+  return $posted_data;
+}
+
+add_filter( 'wpcf7_mail_components', 'acffr_mail_components' );
+
+function acffr_mail_components($components){
+  //print_r($components);
+  //die();
+    return $components;
+}
+
 /**
  *
  * Add the acffr hidden fields to the form.
