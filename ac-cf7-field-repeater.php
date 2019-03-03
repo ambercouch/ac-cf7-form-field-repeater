@@ -287,7 +287,8 @@ function ac_repeater_properties($properties, $wpcf7form) {
 
                 array_push($stack,$tag_html_type);
 
-                echo '<'.$tag_html_type.' id="'.$tag_id.'" '.implode(' ',$tag_html_data).' data-ac-repeater class="acrepeater">';
+                //echo '<'.$tag_html_type.' id="'.$tag_id.'" '.implode(' ',$tag_html_data).' data-ac-repeater="'.$tag_id.'" class="acrepeater">';
+                echo '<'.$tag_html_type.' id="'.$tag_id.'" '.implode(' ',$tag_html_data).' data-ac-repeater="'.$tag_id.'" class="acrepeater">';
             }
             else if ($form_part == '[/acrepeater]') {
                 echo '</'.array_pop($stack).'>';
