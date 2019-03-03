@@ -302,33 +302,54 @@ function ac_repeater_properties($properties, $wpcf7form) {
     return $properties;
 }
 
-add_filter( 'wpcf7_posted_data', 'acffr_posted_data' );
+//add_filter( 'wpcf7_posted_data', 'acffr_posted_data' );
 
 function acffr_posted_data($posted_data){
+    return $posted_data;
+    var_dump($posted_data);
+
 
 
     $repeated_groups = json_decode(stripslashes($posted_data['_acffr_repeatable_groups']));
+
     if (is_array($repeated_groups) && count($repeated_groups) > 0) {
         foreach ($repeated_groups as $group) {
-           $posted_data[$group] = '';
+           $posted_data[$group] = array();
             $repeated_fields = json_decode(stripslashes($posted_data['_acffr_repeatable_group_fields']));
+            var_dump($repeated_fields);
             if (is_array($repeated_fields) && count($repeated_fields) > 0) {
                 foreach ($repeated_fields as $field) {
-                    echo $field;
-                  echo $posted_data[$field];
-                    $posted_data[$group] .= $posted_data[$field] . "\r\n";
+                    array_push($posted_data[$group], $posted_data[$field]);
                 }
             }
         }
     }
+
+    var_dump($posted_data);
+
   return $posted_data;
 }
 
 add_filter( 'wpcf7_mail_components', 'acffr_mail_components' );
 
 function acffr_mail_components($components){
-  //print_r($components);
-  //die();
+    $acffr_mail_raw = WPCF7_Mail::get_current();
+    $body = $acffr_mail_raw->get('body');
+    $body_array = explode( "\n", $body);
+    $body_replaced = [];
+    foreach ($body_array as $num => $line){
+       $line = new WPCF7_MailTaggedText( $line );
+       $replaced = $line->replace_tags();
+       $body_replaced[$num] = $replaced;
+    }
+//    $body = implode( "\n", $body_replaced );
+
+    //var_dump($acffr_mail_raw->get('body'));
+    $components['body'] = $body;
+print_r($body_array);
+    print_r($body_replaced);
+  print_r($components);
+  die();
     return $components;
 }
 
