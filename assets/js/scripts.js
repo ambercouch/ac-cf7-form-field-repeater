@@ -77,7 +77,7 @@
                         if (cloneSettings.arrayName === null) {
                             $(this).attr('name', $(this).attr('name') + '-' + cloneSettings.cloneCount);
                         }else {
-                            $(this).attr('name', cloneSettings.arrayName + '[' + cloneSettings.arrayName + cloneSettings.cloneCount + ']' +'[' +  $(this).attr('name') + ']');
+                            $(this).attr('name', cloneSettings.arrayName + '[' + cloneSettings.cloneCount + ']' +'[' +  $(this).attr('name') + ']');
                         }
                     });
 
@@ -91,7 +91,7 @@
                     if (cloneSettings.arrayName === null){
                         cloneName   =  cloneSettings.cloneNames[i] + '-' + cloneSettings.cloneCount;
                     }else{
-                        cloneName =  cloneSettings.arrayName + '['+ cloneSettings.arrayName + cloneSettings.cloneCount +'][' +cloneSettings.cloneNames[i] + ']'
+                        cloneName =  cloneSettings.arrayName + '['+ cloneSettings.cloneCount +'][' +cloneSettings.cloneNames[i] + ']'
                     }
 
                     $(this).attr('name', cloneName)
