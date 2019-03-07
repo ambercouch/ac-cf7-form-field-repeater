@@ -53,8 +53,8 @@ class ContactForm7FormFieldRepeater
         add_action( 'wpcf7_enqueue_scripts',  array(__CLASS__, 'acffr_scripts'), 11 );
         add_action( 'admin_init', array(__CLASS__, 'acffr_parent_active') );
         add_action('wpcf7_init', array(__CLASS__, 'acffr_add_form_tag_ac_repeater'), 10);
-        add_action( 'wpcf7_admin_init', array(__CLASS__,'wpcf7_add_tag_generator_ac_cf7_repeater'), 35 );
-        add_filter( 'wpcf7_contact_form_properties', array(__CLASS__,'ac_repeater_properties'), 10, 2 );
+        add_action( 'wpcf7_admin_init', array(__CLASS__,'acffr_add_tag_generator_acrepeater'), 35 );
+        add_filter( 'wpcf7_contact_form_properties', array(__CLASS__,'acffr_properties'), 10, 2 );
         add_filter( 'wpcf7_posted_data', array($this,'acffr_posted_data') );
         add_filter( 'wpcf7_mail_components', array($this,'acffr_mail_components') );
 
@@ -149,7 +149,7 @@ class ContactForm7FormFieldRepeater
      * Adds AC Repeater to the CF7 editor
      *
      */
-    function wpcf7_add_tag_generator_ac_cf7_repeater() {
+    function acffr_add_tag_generator_acrepeater() {
         if (class_exists('WPCF7_TagGenerator')) {
             $tag_generator = WPCF7_TagGenerator::get_instance();
             $tag_generator->add( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ), array(__CLASS__,'wpcf7_tg_pane_ac_cf7_repeater'));
@@ -249,7 +249,7 @@ class ContactForm7FormFieldRepeater
         <?php }
     }
 
-    function ac_repeater_properties($properties, $wpcf7form) {
+    function acffr_properties($properties, $wpcf7form) {
 //        /print_r($properties);
         if (!is_admin() || (defined('DOING_AJAX') && DOING_AJAX)) {
 
