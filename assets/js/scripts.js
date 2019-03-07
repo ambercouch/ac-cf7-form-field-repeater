@@ -34,7 +34,7 @@
             repeater.clones.push(elementToRepeat);
 
             var settings = {
-                'cloneCount' : 1,
+                'cloneCount' : 0,
                 'cloneNames' : [],
                 'element' : elementToRepeat,
                 'repeaterText' : repeaterText,
