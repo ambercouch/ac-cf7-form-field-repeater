@@ -27,12 +27,12 @@
  */
 defined('ABSPATH') or die('You do not have the required permissions');
 
-if (!defined('ACCF7R_VERSION')) define( 'ACCF7R_VERSION', '1.0.1' );
-if (!defined('ACCF7R_PLUGIN')) define( 'ACCF7R_PLUGIN', __FILE__ );
+if (!defined('ACFFR_VERSION')) define( 'ACFFR_VERSION', '1.0.1' );
+if (!defined('ACFFR_PLUGIN')) define( 'ACFFR_PLUGIN', __FILE__ );
 
 
-function ac_cf7_repeater_plugin_url( $path = '' ) {
-    $url = plugins_url( $path, ACCF7R_PLUGIN );
+function acffr_plugin_url( $path = '' ) {
+    $url = plugins_url( $path, ACFFR_PLUGIN );
     if ( is_ssl() && 'http:' == substr( $url, 0, 5 ) ) {
         $url = 'https:' . substr( $url, 5 );
     }
@@ -49,10 +49,10 @@ class ContactForm7FormFieldRepeater
 
     function __construct() {
 
-        add_action( 'admin_enqueue_scripts',  array(__CLASS__, 'ac_cf7_repeater_enqueue_scripts'), 11 );
-        add_action( 'wpcf7_enqueue_scripts',  array(__CLASS__, 'ac_cf7_repeater_scripts'), 11 );
-        add_action( 'admin_init', array(__CLASS__, 'ac_cf7_repeater_parent_active') );
-        add_action('wpcf7_init', array(__CLASS__, 'ac_cf7_repeater_add_form_tag_ac_repeater'), 10);
+        add_action( 'admin_enqueue_scripts',  array(__CLASS__, 'acffr_enqueue_scripts'), 11 );
+        add_action( 'wpcf7_enqueue_scripts',  array(__CLASS__, 'acffr_scripts'), 11 );
+        add_action( 'admin_init', array(__CLASS__, 'acffr_parent_active') );
+        add_action('wpcf7_init', array(__CLASS__, 'acffr_add_form_tag_ac_repeater'), 10);
         add_action( 'wpcf7_admin_init', array(__CLASS__,'wpcf7_add_tag_generator_ac_cf7_repeater'), 35 );
         add_filter( 'wpcf7_contact_form_properties', array(__CLASS__,'ac_repeater_properties'), 10, 2 );
         add_filter( 'wpcf7_posted_data', array($this,'acffr_posted_data') );
@@ -66,12 +66,12 @@ class ContactForm7FormFieldRepeater
      * Load the admin scripts if this is a wpcf7 page
      *
      */
-    function ac_cf7_repeater_enqueue_scripts( $hook_suffix ) {
+    function acffr_enqueue_scripts( $hook_suffix ) {
         if ( false === strpos( $hook_suffix, 'wpcf7' ) ) {
             return; //don't load styles and scripts if this isn't a CF7 page.
         }
 
-        wp_enqueue_script('ac-cf7-repeater-scripts-admin', ac_cf7_repeater_plugin_url( 'assets/js/scripts_admin.js' ),array(), ACCF7R_VERSION,true);
+        wp_enqueue_script('ac-cf7-repeater-scripts-admin', acffr_plugin_url( 'assets/js/scripts_admin.js' ),array(), ACFFR_VERSION,true);
         //wp_localize_script('ac-cf7-repeater-scripts-admin', 'wpcf7cf_options_0', get_option(WPCF7CF_OPTIONS));
 
     }
@@ -81,9 +81,9 @@ class ContactForm7FormFieldRepeater
      * Load the front end wpcf7 scripts
      *
      */
-    function ac_cf7_repeater_scripts( $hook_suffix ) {
+    function acffr_scripts( $hook_suffix ) {
 
-        wp_enqueue_script('ac-cf7-repeater-scripts', ac_cf7_repeater_plugin_url( 'assets/js/scripts.js' ),array(), ACCF7R_VERSION,true);
+        wp_enqueue_script('ac-cf7-repeater-scripts', acffr_plugin_url( 'assets/js/scripts.js' ),array(), ACFFR_VERSION,true);
         //wp_localize_script('ac-cf7-repeater-scripts-admin', 'wpcf7cf_options_0', get_option(WPCF7CF_OPTIONS));
 
     }
@@ -93,9 +93,9 @@ class ContactForm7FormFieldRepeater
      * Test if cf7 is active
      *
      */
-    function ac_cf7_repeater_parent_active() {
+    function acffr_parent_active() {
         if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
-            add_action( 'admin_notices', array(__CLASS__, 'ac_cf7_repeater_no_parent_notice') );
+            add_action( 'admin_notices', array(__CLASS__, 'acffr_no_parent_notice') );
 
             deactivate_plugins( plugin_basename( __FILE__ ) );
 
@@ -105,7 +105,7 @@ class ContactForm7FormFieldRepeater
         }
     }
 
-    function ac_cf7_repeater_no_parent_notice() { ?>
+    function acffr_no_parent_notice() { ?>
       <div class="error">
         <p>
             <?php printf(
@@ -122,13 +122,13 @@ class ContactForm7FormFieldRepeater
      * Register acrepeater
      *
      */
-    function ac_cf7_repeater_add_form_tag_ac_repeater() {
+    function acffr_add_form_tag_ac_repeater() {
 
         // Test if new 4.6+ functions exists
         if (function_exists('wpcf7_add_form_tag')) {
-            wpcf7_add_form_tag( 'acrepeater', array(__CLASS__, 'ac_cf7_repeater_ac_repater_formtag_handler'), true );
+            wpcf7_add_form_tag( 'acrepeater', array(__CLASS__, 'acffr_ac_repater_formtag_handler'), true );
         } else {
-            wpcf7_add_shortcode( 'acrepeater', array(__CLASS__, 'ac_cf7_repeater_ac_repater_formtag_handler'), true );
+            wpcf7_add_shortcode( 'acrepeater', array(__CLASS__, 'acffr_ac_repater_formtag_handler'), true );
         }
     }
 
@@ -138,7 +138,7 @@ class ContactForm7FormFieldRepeater
      * Output the repeater tag
      *
      */
-    function ac_cf7_repeater_ac_repater_formtag_handler( $tag ) {
+    function acffr_ac_repater_formtag_handler( $tag ) {
         $tag = new WPCF7_FormTag($tag);
         return $tag->content;
     }
