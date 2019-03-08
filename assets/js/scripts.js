@@ -1,5 +1,5 @@
 /*!
- * AC Form Field repeater 0.0.1
+ * AC Form Field repeater 0.0.2
  *
  * Copyright 2017, Richie Arnold and AmberCouch - http://ambercouch.co.uk
  * Released under the WTFPL license - http://sam.zoy.org/wtfpl/
@@ -8,7 +8,6 @@
 
 
 ;(function( $ ){
-    console.log('ac form field repater');
     //Check for elements that need to repeat
     if ($('[data-ac-repeater]').length > 0){
 
@@ -126,7 +125,6 @@
  */
 
 ;(function( $ ){
-    console.log('cf7ffr repeater');
     let $repeaterGroups = $('[data-ac-repeater]');
     let $repeaterFields = $('[data-ac-repeater] .wpcf7-form-control');
     window.addEventListener('cloneAdded', function (e) {
@@ -137,8 +135,6 @@
     let $repeaterFieldsInput = $('[name="_acffr_repeatable_group_fields"]');
     let ffrGroups = [];
     let ffrFields = [];
-
-
 
     $.each($repeaterGroups, function (i, el) {
         ffrGroups.push(el.id);
@@ -156,13 +152,7 @@
             ffrFields.push($(el).attr('name'));
         });
         $repeaterFieldsInput.val(JSON.stringify(ffrFields));
-        console.log('clone added repeaterFields updated')
     }, false);
-
-
-
-
-    console.log(ffrGroups);
 
 
 })( window.jQuery);
