@@ -23,7 +23,7 @@
             var elementToRepeat = $(this);
             var repeaterText = elementToRepeat.attr('data-ac-repeater-text') ? elementToRepeat.attr('data-ac-repeater-text') : 'Repeat fields';
             var adderId = 'acAdder' + i;
-            var adder = '<button id="'+adderId+'">'+repeaterText+'</button>'
+            var adder = '<p><button id="'+adderId+'">'+repeaterText+'</button></p>'
             var adderPosition =  elementToRepeat.attr('data-ac-repeater-position') ? elementToRepeat.attr('data-ac-repeater-position') : 'prepend';
             var arrayName = elementToRepeat.attr('data-ac-repeater') ? elementToRepeat.attr('data-ac-repeater') : null;
             var eventCloneAdded = new CustomEvent('cloneAdded')
