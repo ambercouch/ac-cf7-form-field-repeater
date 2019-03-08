@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: AC CF7 Field Repeater
-  Plugin URI: https://github.com/ambercouch/ac-cf7-field-repeater
+  Plugin URI: https://github.com/ambercouch/ac-cf7-form-field-repeater
   Description: Add repeatable fields to Contact Form 7 
   Version: 0.1
   Author: AmberCouch
@@ -152,13 +152,13 @@ class ContactForm7FormFieldRepeater
     function acffr_add_tag_generator_acrepeater() {
         if (class_exists('WPCF7_TagGenerator')) {
             $tag_generator = WPCF7_TagGenerator::get_instance();
-            $tag_generator->add( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ), array(__CLASS__,'wpcf7_tg_pane_ac_cf7_repeater'));
+            $tag_generator->add( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ), array(__CLASS__,'acffr_tg_pane_acrepeater'));
         } else if (function_exists('wpcf7_add_tag_generator')) {
-            wpcf7_add_tag_generator( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ),	 array(__CLASS__,'wpcf7-tg-pane-ac_cf7_repeater'),  array(__CLASS__,'wpcf7_tg_pane_ac_cf7_repeater') );
+            wpcf7_add_tag_generator( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ),	 array(__CLASS__,'wpcf7-tg-pane-ac_cf7_repeater'),  array(__CLASS__,'acffr_tg_pane_acrepeater') );
         }
     }
 
-    function wpcf7_tg_pane_ac_cf7_repeater($contact_form, $args = '') {
+    function acffr_tg_pane_acrepeater($contact_form, $args = '') {
         if (class_exists('WPCF7_TagGenerator')) {
             $args = wp_parse_args( $args, array() );
             $description = __( "Generate a form-tag that will repeat input fields %s", 'acffr' );
