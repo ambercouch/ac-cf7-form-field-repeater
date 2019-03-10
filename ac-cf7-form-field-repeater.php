@@ -7,7 +7,7 @@
   Author: AmberCouch
   Author URI: http://ambercouch.co.uk
   Author Email: richard@ambercouch.co.uk
-  Text Domain: acffr
+  Text Domain: ac-cf7-form-field-repeater
   Domain Path: /lang/
   License:
   Copyright 2018 AmberCouch
@@ -39,7 +39,7 @@ function acffr_plugin_url( $path = '' ) {
     return $url;
 }
 
-class ContactForm7FormFieldRepeater
+class ACFFR_FormFieldRepeater
 {
 
    private $repeated_fields = array();
@@ -109,7 +109,7 @@ class ContactForm7FormFieldRepeater
       <div class="error">
         <p>
             <?php printf(
-                __('%s must be installed and activated for the CF7 Field Repeater to work', 'acffr'),
+                __('%s must be installed and activated for the CF7 Field Repeater to work', 'ac-cf7-form-field-repeater'),
                 '<a href="'.admin_url('plugin-install.php?tab=search&s=contact+form+7').'">Contact Form 7</a>'
             ); ?>
         </p>
@@ -161,8 +161,8 @@ class ContactForm7FormFieldRepeater
     function acffr_tg_pane_acrepeater($contact_form, $args = '') {
         if (class_exists('WPCF7_TagGenerator')) {
             $args = wp_parse_args( $args, array() );
-            $description = __( "Generate a form-tag that will repeat input fields %s", 'acffr' );
-            $desc_link = '<a href="https://formfieldrepeater.com" target="_blank">'.__( 'AC Form Field Repeater', 'acffr' ).'</a>';
+            $description = __( "Generate a form-tag that will repeat input fields %s", 'ac-cf7-form-field-repeater' );
+            $desc_link = '<a href="https://formfieldrepeater.com" target="_blank">'.__( 'AC Form Field Repeater', 'ac-cf7-form-field-repeater' ).'</a>';
             ?>
           <div class="control-box">
               <?php //print_r($args); ?>
@@ -172,17 +172,17 @@ class ContactForm7FormFieldRepeater
               <table class="form-table"><tbody>
                 <tr>
                   <th scope="row">
-                    <label for="<?php echo esc_attr( $args['content'] . '-name' ); ?>"><?php echo esc_html( __( 'Name', 'acffr' ) ); ?></label>
+                    <label for="<?php echo esc_attr( $args['content'] . '-name' ); ?>"><?php echo esc_html( __( 'Name', 'ac-cf7-form-field-repeater' ) ); ?></label>
                   </th>
                   <td>
                     <input type="text" name="name" class="tg-name oneline" id="<?php echo esc_attr( $args['content'] . '-name' ); ?>" /><br>
-                    <em><?php echo esc_html( __( 'Just name your repeater field', 'acffr' ) ); ?></em>
+                    <em><?php echo esc_html( __( 'Just name your repeater field', 'ac-cf7-form-field-repeater' ) ); ?></em>
                   </td>
                 </tr>
 
                 <tr>
                   <th scope="row">
-                    <label for="<?php echo esc_attr( $args['content'] . '-id' ); ?>"><?php echo esc_html( __( 'ID (optional)', 'acffr' ) ); ?></label>
+                    <label for="<?php echo esc_attr( $args['content'] . '-id' ); ?>"><?php echo esc_html( __( 'ID (optional)', 'ac-cf7-form-field-repeater' ) ); ?></label>
                   </th>
                   <td>
                     <input type="text" name="id" class="idvalue oneline option" id="<?php echo esc_attr( $args['content'] . '-id' ); ?>" />
@@ -191,7 +191,7 @@ class ContactForm7FormFieldRepeater
 
                 <tr>
                   <th scope="row">
-                    <label for="<?php echo esc_attr( $args['content'] . '-class' ); ?>"><?php echo esc_html( __( 'Class (optional)', 'acffr' ) ); ?></label>
+                    <label for="<?php echo esc_attr( $args['content'] . '-class' ); ?>"><?php echo esc_html( __( 'Class (optional)', 'ac-cf7-form-field-repeater' ) ); ?></label>
                   </th>
                   <td>
                     <input type="text" name="class" class="classvalue oneline option" id="<?php echo esc_attr( $args['content'] . '-class' ); ?>" />
@@ -206,7 +206,7 @@ class ContactForm7FormFieldRepeater
             <input type="text" name="acrepeater" class="tag code " readonly="readonly" onfocus="this.select()" />
 
             <div class="submitbox">
-              <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'acffr' ) ); ?>" />
+              <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'ac-cf7-form-field-repeater' ) ); ?>" />
             </div>
 
             <br class="clear" />
@@ -217,7 +217,7 @@ class ContactForm7FormFieldRepeater
               <table>
                 <tr>
                   <td>
-                      <?php echo esc_html( __( 'Name', 'acffr' ) ); ?><br />
+                      <?php echo esc_html( __( 'Name', 'ac-cf7-form-field-repeater' ) ); ?><br />
                     <input type="text" name="name" class="tg-name oneline" /><br />
                   </td>
                   <td></td>
@@ -229,11 +229,11 @@ class ContactForm7FormFieldRepeater
 
                 <tr>
                   <td>
-                      <?php echo esc_html( __( 'ID (optional)', 'acffr' ) ); ?><br />
+                      <?php echo esc_html( __( 'ID (optional)', 'ac-cf7-form-field-repeater' ) ); ?><br />
                     <input type="text" name="id" class="idvalue oneline option" />
                   </td>
                   <td>
-                      <?php echo esc_html( __( 'Class (optional)', 'acffr' ) ); ?><br />
+                      <?php echo esc_html( __( 'Class (optional)', 'ac-cf7-form-field-repeater' ) ); ?><br />
                     <input type="text" name="class" class="classvalue oneline option" />
                   </td>
                 </tr>
@@ -243,7 +243,7 @@ class ContactForm7FormFieldRepeater
                 </tr>
               </table>
 
-              <div class="tg-tag"><?php echo esc_html( __( "Copy this code and paste it into the form left.", 'acffr' ) ); ?><br /><input type="text" name="honeypot" class="tag" readonly="readonly" onfocus="this.select()" /></div>
+              <div class="tg-tag"><?php echo esc_html( __( "Copy this code and paste it into the form left.", 'ac-cf7-form-field-repeater' ) ); ?><br /><input type="text" name="honeypot" class="tag" readonly="readonly" onfocus="this.select()" /></div>
             </form>
           </div>
         <?php }
@@ -404,7 +404,7 @@ class ContactForm7FormFieldRepeater
 
 }
 
-new ContactForm7FormFieldRepeater;
+new ACFFR_FormFieldRepeater;
 
 
 
