@@ -348,10 +348,10 @@ class ACFFR_FormFieldRepeater
 //                    $repeat_group[] = $line;
                     $repeat_group_line_num = $num;
 //                    unset($repeat_group[$num]);
-                }elseif ($repeating == true && $line != '[/'.$group_name.']'){
+                }elseif ($repeating == true && $line != '[/acrepeater]'){
                   //we are repeating
                     $repeat_group[] = $line;
-                }elseif ($repeating == true && $line == '[/'.$group_name.']'){
+                }elseif ($repeating == true && $line == '[/acrepeater]'){
                   //we are closing the repeating
                     $repeating = false;
 //                    $repeat_group[] = $line;
