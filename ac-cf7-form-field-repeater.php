@@ -262,7 +262,7 @@ class ACFFR_FormFieldRepeater
 
     }
 
-    function acffr_properties($properties, $wpcf7form) {
+    public static function acffr_properties($properties, $wpcf7form) {
 
         if (!is_admin() || (defined('DOING_AJAX') && DOING_AJAX)) {
 
