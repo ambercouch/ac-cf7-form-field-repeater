@@ -4,7 +4,7 @@ Donate link: http://ambercouch.co.uk/
 Tags: contact form 7, fields, forms, repeat, repeatable fields
 Requires at least: 4.6
 Tested up to: 5.1
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
