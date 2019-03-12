@@ -68,6 +68,7 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_enqueue_scripts( $hook_suffix ) {
+
         if ( false === strpos( $hook_suffix, 'wpcf7' ) ) {
             return; //don't load styles and scripts if this isn't a CF7 page.
         }
@@ -95,6 +96,7 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_parent_active() {
+
         if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
             add_action( 'admin_notices', array(__CLASS__, 'acffr_no_parent_notice') );
 
@@ -104,9 +106,11 @@ class ACFFR_FormFieldRepeater
                 unset( $_GET['activate'] );
             }
         }
+
     }
 
     function acffr_no_parent_notice() { ?>
+
       <div class="error">
         <p>
             <?php printf(
@@ -115,6 +119,7 @@ class ACFFR_FormFieldRepeater
             ); ?>
         </p>
       </div>
+
         <?php
     }
 
@@ -131,6 +136,7 @@ class ACFFR_FormFieldRepeater
         } else {
             wpcf7_add_shortcode( 'acrepeater', array(__CLASS__, 'acffr_ac_repater_formtag_handler'), true );
         }
+
     }
 
     /**
@@ -140,8 +146,10 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_ac_repater_formtag_handler( $tag ) {
+
         $tag = new WPCF7_FormTag($tag);
         return $tag->content;
+
     }
 
     /**
@@ -151,15 +159,18 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_add_tag_generator_acrepeater() {
+
         if (class_exists('WPCF7_TagGenerator')) {
             $tag_generator = WPCF7_TagGenerator::get_instance();
             $tag_generator->add( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ), array(__CLASS__,'acffr_tg_pane_acrepeater'));
         } else if (function_exists('wpcf7_add_tag_generator')) {
             wpcf7_add_tag_generator( 'acrepeater', __( 'AC Repeater', 'contact-form-7-repeater' ),	 array(__CLASS__,'wpcf7-tg-pane-ac_cf7_repeater'),  array(__CLASS__,'acffr_tg_pane_acrepeater') );
         }
+
     }
 
     function acffr_tg_pane_acrepeater($contact_form, $args = '') {
+
         if (class_exists('WPCF7_TagGenerator')) {
             $args = wp_parse_args( $args, array() );
             $description = __( "Generate a form-tag that will repeat input fields %s", 'ac-cf7-form-field-repeater' );
@@ -248,10 +259,11 @@ class ACFFR_FormFieldRepeater
             </form>
           </div>
         <?php }
+
     }
 
     function acffr_properties($properties, $wpcf7form) {
-//        /print_r($properties);
+
         if (!is_admin() || (defined('DOING_AJAX') && DOING_AJAX)) {
 
             $form = $properties['form'];
@@ -287,7 +299,6 @@ class ACFFR_FormFieldRepeater
             $properties['form'] = ob_get_clean();
         }
 
-
         return $properties;
     }
 
@@ -297,30 +308,21 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_posted_data($posted_data){
-        //var_dump($posted_data);die();
-        //get the repeated group from the post array
+
         $repeated_groups_data = json_decode(stripslashes($posted_data['_acffr_repeatable_groups']));
         $this->repeated_groups_data = $repeated_groups_data;
-
-        //var_dump( $repeated_groups_data);die();
 
         if (is_array($repeated_groups_data) && count($repeated_groups_data) > 0) {
             foreach ($repeated_groups_data as $group) {
 
               $this->repeated_groups[] = $posted_data[$group];
               unset($posted_data[$group]);
-//                $this->repeated_fields = json_decode(stripslashes($posted_data['_acffr_repeatable_group_fields']));
-//                $repeated_fields = $this->repeated_fields;
-//                var_dump($repeated_fields);
-//                if (is_array($repeated_fields) && count($repeated_fields) > 0) {
-//                    foreach ($repeated_fields as $field) {
-//                        array_push($posted_data[$group], $posted_data[$field]);
-//                    }
-//                }
+
             }
         }
 
         return $posted_data;
+
     }
 
 
@@ -330,7 +332,6 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_mail_components($components){
-
 
         $acffr_mail_raw = WPCF7_Mail::get_current();
         $body = $acffr_mail_raw->get('body');
@@ -342,34 +343,49 @@ class ACFFR_FormFieldRepeater
         $repeat_group_line_num= 0;
 
         $repeat_group_data = $this->repeated_groups_data;
+
         foreach ($repeat_group_data as $key => $group_name){
+
             foreach ($body_array as $num => $line){
+
                 if($line == '['.$group_name.']'){
-                  //The repeat tag is opened
+
+                    //The repeat tag is opened
                     $repeating = true;
-//                    $repeat_group[] = $line;
+
                     $repeat_group_line_num = $num;
-//                    unset($repeat_group[$num]);
+
                 }elseif ($repeating == true && $line != '[/acrepeater]'){
-                  //we are repeating
+
+                    //we are repeating
                     $repeat_group[] = $line;
+
                 }elseif ($repeating == true && $line == '[/acrepeater]'){
-                  //we are closing the repeating
+
+                    //we are closing the repeating
                     $repeating = false;
+
                 }else{
+
                     $line = new WPCF7_MailTaggedText( $line );
                     $replaced = $line->replace_tags();
                     $body_replaced[$num] = $replaced;
+
                 }
             }
 
               foreach ($this->repeated_groups[$key] as $key => $repeat){
 
                   $repeated_groups[] = $repeat_group;
+
                   foreach ( $repeat as $tag => $value){
+
                     $tag = '[' . $tag . ']';
+
                     foreach ($repeated_groups[$key] as $num => $line){
+
                       $repeated_groups[$key][$num] = str_replace($tag, $value, $line);
+
                     }
 
                   }
@@ -390,9 +406,11 @@ class ACFFR_FormFieldRepeater
     }
 
     function acffr_additional_mail($additional_mail, $contact_form) {
+
         if (!is_array($additional_mail) || !array_key_exists('mail_2', $additional_mail)) return $additional_mail;
         $additional_mail['mail_2'] = $this->acffr_mail_components($additional_mail['mail_2']);
         return $additional_mail;
+
     }
 
 
@@ -421,12 +439,15 @@ function acffr_form_hidden_fields($hidden_fields) {
         '_acffr_repeatable_group_fields' => '',
         '_acffr_repeatable_groups' => '',
     ));
+
 }
 
 function acffr_flatten(array $array) {
+
     $return = array();
     array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
     return $return;
+    
 }
 
 
