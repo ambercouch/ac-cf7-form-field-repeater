@@ -3,7 +3,7 @@
   Plugin Name: AC CF7 Form Field Repeater
   Plugin URI: https://github.com/ambercouch/ac-cf7-form-field-repeater
   Description: Add repeatable fields to Contact Form 7 
-  Version: 0.0.3
+  Version: 0.0.4
   Author: AmberCouch
   Author URI: http://ambercouch.co.uk
   Author Email: richard@ambercouch.co.uk
@@ -27,7 +27,7 @@
  */
 defined('ABSPATH') or die('You do not have the required permissions');
 
-if (!defined('ACFFR_VERSION')) define( 'ACFFR_VERSION', '1.0.1' );
+if (!defined('ACFFR_VERSION')) define( 'ACFFR_VERSION', '0.0.4' );
 if (!defined('ACFFR_PLUGIN')) define( 'ACFFR_PLUGIN', __FILE__ );
 
 

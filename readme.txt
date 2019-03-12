@@ -4,7 +4,7 @@ Donate link: http://ambercouch.co.uk/
 Tags: contact form 7, fields, forms, repeat, repeatable fields
 Requires at least: 4.6
 Tested up to: 5.1
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,4 +55,16 @@ Any native Contact Form 7 tags can be used within the `[acrepeater]` tags
 = 0.0.1 =
 Initial version
 
+= 0.0.4 =
+We now support additional mail (Auto responder) and flamingo
+
 == Changelog ==
+
+= 0.0.2 =
+* Fixed issues with function names
+
+= 0.0.3 =
+* Add support for additional mail ( Auto responder )
+
+= 0.0.4 =
+* Add support for flamingo
