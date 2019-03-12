@@ -315,8 +315,19 @@ class ACFFR_FormFieldRepeater
         if (is_array($repeated_groups_data) && count($repeated_groups_data) > 0) {
             foreach ($repeated_groups_data as $group) {
 
-              $this->repeated_groups[] = $posted_data[$group];
-              unset($posted_data[$group]);
+                $this->repeated_groups[] = $posted_data[$group];
+
+                foreach ($posted_data[$group] as $key => $repeat){
+
+                  foreach ($repeat as $tag => $value){
+                      $key = $key + 1;
+                      $posted_data[$key . ' ' . $tag ] = $value;
+                  }
+
+
+                }
+
+                 unset($posted_data[$group]);
 
             }
         }
@@ -413,8 +424,6 @@ class ACFFR_FormFieldRepeater
 
     }
 
-
-
 }
 
 new ACFFR_FormFieldRepeater;
@@ -447,7 +456,7 @@ function acffr_flatten(array $array) {
     $return = array();
     array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
     return $return;
-    
+
 }
 
 
