@@ -57,6 +57,7 @@ class ACFFR_FormFieldRepeater
         add_filter( 'wpcf7_contact_form_properties', array(__CLASS__,'acffr_properties'), 10, 2 );
         add_filter( 'wpcf7_posted_data', array($this,'acffr_posted_data') );
         add_filter( 'wpcf7_mail_components', array($this,'acffr_mail_components') );
+        add_filter( 'wpcf7_additional_mail', array($this,'acffr_additional_mail'), 10, 2 );
 
 
     }
@@ -393,6 +394,12 @@ class ACFFR_FormFieldRepeater
         //print_r($components);
         //die();
         return $components;
+    }
+
+    function acffr_additional_mail($additional_mail, $contact_form) {
+        if (!is_array($additional_mail) || !array_key_exists('mail_2', $additional_mail)) return $additional_mail;
+        $additional_mail['mail_2'] = $this->acffr_mail_components($additional_mail['mail_2']);
+        return $additional_mail;
     }
 
 
