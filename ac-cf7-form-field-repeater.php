@@ -330,7 +330,8 @@ class ACFFR_FormFieldRepeater
      *
      */
     function acffr_mail_components($components){
-      //var_dump($this->repeated_groups);
+
+
         $acffr_mail_raw = WPCF7_Mail::get_current();
         $body = $acffr_mail_raw->get('body');
         $body_array = explode( "\n", $body);
@@ -355,8 +356,6 @@ class ACFFR_FormFieldRepeater
                 }elseif ($repeating == true && $line == '[/acrepeater]'){
                   //we are closing the repeating
                     $repeating = false;
-//                    $repeat_group[] = $line;
-//                    unset($repeat_group[$num]);
                 }else{
                     $line = new WPCF7_MailTaggedText( $line );
                     $replaced = $line->replace_tags();
@@ -376,23 +375,17 @@ class ACFFR_FormFieldRepeater
                   }
               }
 
-
         }
-     //var_dump( $repeated_groups);die();
-//        var_dump($body_replaced);
+
         array_splice($body_replaced, $repeat_group_line_num,0,$repeated_groups);
-        //var_dump($body_replaced);die;
 
         $body_replaced = acffr_flatten($body_replaced);
       
         $body = implode( "\n",  $body_replaced);
 
-//
-//        //var_dump($acffr_mail_raw->get('body'));
+
         $components['body'] = $body;
-//
-        //print_r($components);
-        //die();
+
         return $components;
     }
 
