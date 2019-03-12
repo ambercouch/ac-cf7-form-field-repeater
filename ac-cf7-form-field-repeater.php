@@ -380,14 +380,9 @@ class ACFFR_FormFieldRepeater
      //var_dump( $repeated_groups);die();
 //        var_dump($body_replaced);
         array_splice($body_replaced, $repeat_group_line_num,0,$repeated_groups);
-        function flatten(array $array) {
-            $return = array();
-            array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
-            return $return;
-        }
         //var_dump($body_replaced);die;
 
-        $body_replaced = flatten($body_replaced);
+        $body_replaced = acffr_flatten($body_replaced);
       
         $body = implode( "\n",  $body_replaced);
 
@@ -426,6 +421,12 @@ function acffr_form_hidden_fields($hidden_fields) {
         '_acffr_repeatable_group_fields' => '',
         '_acffr_repeatable_groups' => '',
     ));
+}
+
+function acffr_flatten(array $array) {
+    $return = array();
+    array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
+    return $return;
 }
 
 
